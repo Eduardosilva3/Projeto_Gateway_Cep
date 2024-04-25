@@ -6,6 +6,7 @@ import br.com.gateway.api.dto.EnderecoDTO;
 import br.com.gateway.api.services.EnderecoService;
 import br.com.gateway.api.utils.ScannerUtils;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -68,7 +69,12 @@ public class App {
                 case 2:
                     out.println("BUSCANDO TODOS OS ENDERECOS NA BASE DE DADOS...");
                     try {
-                        enderecoService.buscarEnderecos();
+                        List<EnderecoDTO> enderecos = enderecoService.buscarEnderecos();
+                        if(enderecos.isEmpty()){
+                            out.println("NENHUM ENDEREÇO ENCONTRADO!");
+                        }else{
+                            enderecos.forEach(EnderecoDTO::exibirEndereco);
+                        }
                     }catch (Exception e) {
                         logger.warning("ERRO AO BUSCAR ENDEREÇOS: " + e.getMessage());
                     }

@@ -5,6 +5,7 @@ import br.com.gateway.api.dao.EnderecoDao;
 import br.com.gateway.api.dto.EnderecoDTO;
 import br.com.gateway.api.exception.GatewayException;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -33,9 +34,9 @@ public class EnderecoService {
 
     }
 
-    public void buscarEnderecos() {
+    public List<EnderecoDTO> buscarEnderecos() {
         EnderecoDao enderecoDao = new EnderecoDao();
-        enderecoDao.findAll().forEach(EnderecoDTO::exibirEndereco);
+        return enderecoDao.findAll();
     }
 
     public static boolean validaCep(String cep) {
