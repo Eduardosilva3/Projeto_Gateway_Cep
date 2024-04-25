@@ -2,11 +2,9 @@ package br.com.gateway.api.client;
 
 import br.com.gateway.api.dto.EnderecoDTO;
 import br.com.gateway.api.exception.GatewayException;
-import com.mysql.cj.log.Log;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.HttpCookie;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;

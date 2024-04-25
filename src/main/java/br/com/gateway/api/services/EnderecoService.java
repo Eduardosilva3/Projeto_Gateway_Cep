@@ -2,7 +2,6 @@ package br.com.gateway.api.services;
 
 import br.com.gateway.api.client.ApiHttpClientCep;
 import br.com.gateway.api.dao.EnderecoDao;
-import br.com.gateway.api.database.DataBase;
 import br.com.gateway.api.dto.EnderecoDTO;
 import br.com.gateway.api.exception.GatewayException;
 

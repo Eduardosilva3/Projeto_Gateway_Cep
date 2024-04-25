@@ -1,6 +1,7 @@
 package br.com.gateway.api;
 
 import br.com.gateway.api.config.AppConfig;
+import br.com.gateway.api.database.DataBase;
 import br.com.gateway.api.dto.EnderecoDTO;
 import br.com.gateway.api.services.EnderecoService;
 import br.com.gateway.api.utils.ScannerUtils;
@@ -20,6 +21,7 @@ public class App {
 
     public static void main( String[] args ) {
 
+        DataBase.criarTabelaSeNaoExistir();
 
         EnderecoService enderecoService = new EnderecoService();
         String cep;
@@ -34,7 +36,13 @@ public class App {
             out.println("2 - BUSCAR TODOS OS ENDERECOS NA BASE DE DADOS");
             out.println("3 - SAIR");
 
-            navegacao = ScannerUtils.lerDadoInteiro();
+            try {
+                navegacao = ScannerUtils.lerDadoInteiro();
+            }catch (Exception e) {
+                logger.warning("ERRO AO LER DADO INTEIRO: "+e.getMessage());
+                navegacao = 0;
+            }
+
 
             switch (navegacao) {
                 case 1:
@@ -46,7 +54,7 @@ public class App {
                     try{
                        endereco  = enderecoService.buscarEnderecoViaCep(cep);
                     }catch (Exception e) {
-                        logger.warning("ERRO AO BUSCAR ENDEREÇO VIA CEP: " + e.getCause().getMessage());
+                        logger.warning("ERRO AO BUSCAR ENDEREÇO VIA CEP: "+e.getMessage());
                         break;
                     }
 
@@ -62,7 +70,7 @@ public class App {
                     try {
                         enderecoService.buscarEnderecos();
                     }catch (Exception e) {
-                        logger.warning("ERRO AO BUSCAR ENDEREÇOS: " + e.getCause().getMessage());
+                        logger.warning("ERRO AO BUSCAR ENDEREÇOS: " + e.getMessage());
                     }
                     break;
                 case 3:

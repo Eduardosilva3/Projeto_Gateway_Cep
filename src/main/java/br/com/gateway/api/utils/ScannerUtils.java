@@ -1,6 +1,8 @@
 package br.com.gateway.api.utils;
 
 
+import br.com.gateway.api.exception.GatewayException;
+
 import java.util.Scanner;
 
 public class ScannerUtils {
@@ -20,7 +22,13 @@ public class ScannerUtils {
 
     public static int lerDadoInteiro() {
 
-        return scanner.nextInt();
+        String dado = scanner.next();
+
+        if(!dado.matches("[0-9]+")){
+            throw new GatewayException("Dado inválido, digite um número inteiro!");
+        }
+
+        return Integer.parseInt(dado);
     }
 
     public static void closeScanner() {

@@ -7,6 +7,7 @@ Este é um projeto Java que utiliza JDBC e HttpClient para interagir com uma API
 - **Java 11**
 - **Apache Maven 3.9.2**
 - **Docker e Docker Compose** (caso não tenha o MySQL8 instalado localmente)
+- **IDE Desenvolvimento - Eclipse - Intellij**
 
 ## Tecnologias Utilizadas
 
@@ -19,14 +20,15 @@ Este é um projeto Java que utiliza JDBC e HttpClient para interagir com uma API
 
 ```bash
 git clone https://github.com/Eduardosilva3/Projeto_Gateway_Cep.git
-cd Projeto_Gateway_Cep 
 ```
+## Abra o projeto na IDE ##
+
 ### 2.  Configurar Banco de Dados
 
 ## Usando Docker Compose (para configurar o MySQL)
-Se você estiver utilizando Docker Compose para configurar o MySQL Rode o seguinte comando, ele irá iniciar o container docker e aplicação logo após:
+Se você estiver utilizando Docker Compose para configurar o MySQL Rode o seguinte comando, ele irá iniciar o container docker:
 ```bash
-./RunGatewayCompose.sh
+docker-compose up -d
 ```
 
 ## Usando MySQL Local
@@ -38,11 +40,7 @@ Se já tiver o MySQL configurado localmente:
 - Substitua data_gateway pelo nome da sua base de dados.
 - O programa criará as tabelas automaticamente, se ainda não existirem.
 
-Depois Rode o comando abaixo para iniciar o programa:
-
-```bash
-./RunGateway.sh
-```
+### 3 Execute o projeto seguindo os passos de configuração da IDE
 
 ### Seguir Instruções no Terminal
 - Após iniciar o programa, siga as instruções exibidas no terminal para interagir com o sistema.

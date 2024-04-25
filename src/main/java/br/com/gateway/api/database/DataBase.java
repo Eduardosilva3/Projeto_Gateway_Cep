@@ -6,6 +6,7 @@ import br.com.gateway.api.exception.GatewayException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DataBase {
 
@@ -23,11 +24,35 @@ public class DataBase {
         }
     }
 
-    public static void closeConnection(Connection connection) {
-        try {
-            connection.close();
+
+    private static boolean existTable(Connection con, String tableName) throws SQLException {
+        try (var resultSet = con.getMetaData().getTables(null, null, tableName, null)) {
+            return resultSet.next();
+        }
+    }
+
+    public static void criarTabelaSeNaoExistir() {
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+             Statement statement = conn.createStatement()) {
+
+            if (!existTable(conn, "endereco_gateway")) {
+                String sql = "CREATE TABLE endereco_gateway (" +
+                        "id INT AUTO_INCREMENT PRIMARY KEY," +
+                        "cep VARCHAR(8) UNIQUE NOT NULL," +
+                        "uf VARCHAR(255) NOT NULL," +
+                        "cidade VARCHAR(255) NOT NULL," +
+                        "vizinhanca VARCHAR(255) NOT NULL," +
+                        "rua VARCHAR(255) NOT NULL," +
+                        "service VARCHAR(255) NOT NULL" +
+                        ")";
+                statement.executeUpdate(sql);
+                System.out.println("Tabela 'endereco_gateway' criada com sucesso.");
+            } else {
+                System.out.println("A tabela 'endereco_gateway' já existe no banco de dados.");
+            }
+
         } catch (SQLException e) {
-            throw new GatewayException("Erro ao fechar a conexão com o banco de dados: ", e);
+            System.err.println("Erro ao criar tabela: " + e.getMessage());
         }
     }
 }

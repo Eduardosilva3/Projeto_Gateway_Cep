@@ -4,10 +4,7 @@ import br.com.gateway.api.database.DataBase;
 import br.com.gateway.api.dto.EnderecoDTO;
 import br.com.gateway.api.exception.GatewayException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
